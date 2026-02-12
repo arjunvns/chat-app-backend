@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Smart Weather App - Arjun Singh</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+transition:0.5s;
+background:#87ceeb;
+color:#000;
+}
+
+.container{
+max-width:420px;
+margin:auto;
+padding:20px;
+text-align:center;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.2);
+}
+
+input{
+width:80%;
+padding:10px;
+border-radius:8px;
+border:1px solid #ccc;
+}
+
+button{
+margin-top:10px;
+padding:10px 15px;
+border:none;
+border-radius:8px;
+background:#2196f3;
+color:white;
+cursor:pointer;
+}
+
+.sunny{ background:linear-gradient(#ffe259,#ffa751); }
+.cloudy{ background:linear-gradient(#bdc3c7,#2c3e50); color:white;}
+.rainy{ background:linear-gradient(#4b79a1,#283e51); color:white;}
+.snow{ background:linear-gradient(#e6dada,#274046); color:white;}
+
+.alert{
+background:#ff5252;
+color:white;
+padding:8px;
+border-radius:8px;
+margin-top:10px;
+display:none;
+}
+
+#temp{
+    color: black;
+    font-weight: bold;
+}
+
+#temp{
+    font-size:48px;
+    font-weight:bold;
+    transition:0.5s;
+    text-shadow:0 0 10px rgba(0,0,0,0.3);
+}
+
+/* Hot */
+.hot{
+    color:red;
+    text-shadow:0 0 20px red;
+}
+
+/* Cold */
+.cold{
+    color:#2196f3;
+    text-shadow:0 0 20px #2196f3;
+}
+
+/* Normal */
+.normal{
+    color:black;
+    text-shadow:0 0 10px #888;
+}
+
+/* Background container */
+.bg-animation{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:0;
+pointer-events:none;
+overflow:hidden;
+}
+
+/* ☀ SUN */
+.sun{
+position:absolute;
+top:40px;
+right:40px;
+width:120px;
+height:120px;
+background:#ffeb3b;
+border-radius:50%;
+box-shadow:0 0 60px #ff9800;
+animation:sunGlow 3s ease-in-out infinite alternate;
+display:none;
+}
+
+@keyframes sunGlow{
+from{ box-shadow:0 0 40px #ff9800; }
+to{ box-shadow:0 0 90px #ff5722; }
+}
+
+/* 🌧 RAIN */
+.rain{
+position:absolute;
+width:100%;
+height:100%;
+background:repeating-linear-gradient(
+transparent,
+transparent 20px,
+rgba(255,255,255,0.5) 21px,
+rgba(255,255,255,0.5) 23px
+);
+animation:rainFall 0.5s linear infinite;
+display:none;
+}
+
+@keyframes rainFall{
+from{ background-position:0 0; }
+to{ background-position:0 100px; }
+}
+
+/* ❄ SNOW */
+.snow{
+position:absolute;
+width:100%;
+height:100%;
+background:
+radial-gradient(white 2px, transparent 3px),
+radial-gradient(white 2px, transparent 3px);
+background-size:50px 50px;
+background-position:0 0, 25px 25px;
+animation:snowFall 8s linear infinite;
+display:none;
+}
+
+@keyframes snowFall{
+from{ background-position:0 0, 25px 25px; }
+to{ background-position:0 400px, 25px 425px; }
+}
+ .container{
+position:relative;
+z-index:2;
+}
+
+/* ☁ Clouds */
+.cloud{
+position:absolute;
+width:200px;
+height:60px;
+background:white;
+border-radius:50px;
+opacity:0.7;
+}
+
+.cloud::before,
+.cloud::after{
+content:"";
+position:absolute;
+background:white;
+width:100px;
+height:80px;
+border-radius:50%;
+top:-40px;
+}
+
+.cloud::before{ left:30px; }
+.cloud::after{ left:90px; }
+
+.cloud1{
+top:20%;
+animation:moveCloud 40s linear infinite;
+}
+
+.cloud2{
+top:50%;
+animation:moveCloud 60s linear infinite;
+}
+
+.cloud3{
+top:75%;
+animation:moveCloud 50s linear infinite;
+}
+
+@keyframes moveCloud{
+from{ left:-250px; }
+to{ left:110%; }
+}
+.card{
+position:relative;
+z-index:3;
+}
+
+/* 🌈 Cartoon landscape */
+
+.cartoon-ground{
+position:absolute;
+bottom:0;
+width:100%;
+height:120px;
+background:#4caf50;
+border-top-left-radius:100% 40px;
+border-top-right-radius:100% 40px;
+}
+
+.cartoon-hill{
+position:absolute;
+bottom:60px;
+width:200px;
+height:120px;
+background:#66bb6a;
+border-radius:50%;
+animation:hillMove 20s linear infinite;
+}
+
+.hill1{ left:-200px; }
+.hill2{ left:-400px; animation-duration:30s; }
+
+@keyframes hillMove{
+from{ transform:translateX(0); }
+to{ transform:translateX(1500px); }
+}
+
+</style>
+</head>
+
+<body>
+    <div class="bg-animation">
+        <div class="sun"></div>
+  <div class="rain"></div>
+  <div class="snow"></div>
+  <div class="cloud cloud1"></div>
+  <div class="cloud cloud2"></div>
+  <div class="cloud cloud3"></div>
+  <div class="cartoon-ground"></div>
+<div class="cartoon-hill hill1"></div>
+<div class="cartoon-hill hill2"></div>
+
+</div>
+
+
+<div class="container">
+<div class="card">
+
+<h2>🌦 Smart Weather App</h2>
+
+<input id="city" placeholder="Enter city">
+<br>
+<button onclick="getWeather()">Search</button>
+<button onclick="getLocation()">📍 GPS</button>
+
+<div id="alertBox" class="alert"></div>
+
+<div id="weather"></div>
+
+<canvas id="chart" height="180"></canvas>
+
+</div>
+</div>
+
+<script>
+
+const apiKey="796980c45295b0b8d4fbfd5de185b66a";
+let chart;
+
+async function getWeather(cityName){
+
+let city = cityName || document.getElementById("city").value;
+if(city==="") return;
+
+const res = await fetch(
+`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+);
+
+const data = await res.json();
+
+const temp = data.main.temp;
+const desc = data.weather[0].main.toLowerCase();
+const icon = data.weather[0].icon;
+
+let tempC = data.main.temp;
+let tempF = (tempC * 9/5) + 32;
+
+document.getElementById("weather").innerHTML=`
+<h3>${city}</h3>
+<img src="https://openweathermap.org/img/wn/${icon}@2x.png">
+
+<h1 id="temp">0 °C</h1>
+
+<button onclick="toggleUnit(${tempC.toFixed(2)}, ${tempF.toFixed(2)})">
+Switch °C / °F
+</button>
+
+<p>${data.weather[0].description}</p>
+`;
+
+animateTemp(tempC);   // ✅ move here
+
+
+setBackground(desc);
+checkAlert(temp);
+
+getChart(city);
+}
+
+function setBackground(type){
+
+document.body.className="";
+
+document.querySelector(".sun").style.display="none";
+document.querySelector(".rain").style.display="none";
+document.querySelector(".snow").style.display="none";
+
+if(type.includes("clear")){
+ document.body.classList.add("sunny");
+ document.querySelector(".sun").style.display="block";
+}
+else if(type.includes("cloud")){
+ document.body.classList.add("cloudy");
+}
+else if(type.includes("rain")){
+ document.body.classList.add("rainy");
+ document.querySelector(".rain").style.display="block";
+}
+else if(type.includes("snow")){
+ document.body.classList.add("snow");
+ document.querySelector(".snow").style.display="block";
+}
+}
+
+async function getChart(city){
+
+const res = await fetch(
+`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`
+);
+
+const data = await res.json();
+
+let temps=[];
+let labels=[];
+
+data.list.filter((_,i)=>i%8===0).forEach(day=>{
+temps.push(day.main.temp);
+labels.push(new Date(day.dt_txt).toLocaleDateString());
+});
+
+if(chart) chart.destroy();
+
+chart=new Chart(document.getElementById("chart"),{
+type:"line",
+data:{
+labels:labels,
+datasets:[{
+label:"Temperature °C",
+data:temps,
+borderColor:"blue",
+fill:false
+}]
+}
+});
+}
+
+function getLocation(){
+
+navigator.geolocation.getCurrentPosition(async pos=>{
+
+const lat=pos.coords.latitude;
+const lon=pos.coords.longitude;
+
+const res=await fetch(
+`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
+);
+
+const data=await res.json();
+
+getWeather(data.name);
+
+});
+}
+
+let isCelsius = true;
+
+function toggleUnit(c,f){
+let tempEl = document.getElementById("temp");
+
+if(isCelsius){
+tempEl.innerHTML = f + " °F";
+}else{
+tempEl.innerHTML = c + " °C";
+}
+
+isCelsius = !isCelsius;
+}
+
+function checkAlert(temp){
+let alert=document.getElementById("alertBox");
+
+if(temp>40){
+alert.style.display="block";
+alert.innerHTML="🔥 Heat Alert! Stay hydrated.";
+}
+else if(temp<5){
+alert.style.display="block";
+alert.innerHTML="❄ Cold Alert! Stay warm.";
+}
+else{
+alert.style.display="none";
+}
+}
+
+ function animateTemp(value){
+
+let el=document.getElementById("temp");
+let start=0;
+let step=value/60;
+
+el.classList.remove("hot","cold","normal");
+
+let interval=setInterval(()=>{
+
+start+=step;
+
+if(start>=value){
+start=value;
+clearInterval(interval);
+}
+
+el.innerHTML=start.toFixed(2)+" °C";
+
+},15);
+
+/* Color change */
+if(value>=30){
+el.classList.add("hot");
+}
+else if(value<=10){
+el.classList.add("cold");
+}
+else{
+el.classList.add("normal");
+}
+}
+
+
+</script>
+
+</body>
+</html>

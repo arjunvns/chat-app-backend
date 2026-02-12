@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Real Time Chat - Arjun Singh</title>
+<link rel="stylesheet" href="chat.css">
+
+<!-- Socket.io from server -->
+<script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+
+<div class="login-container" id="loginBox">
+    <h2>Join Chat</h2>
+    <input id="username" placeholder="Enter username">
+    <input id="room" placeholder="Enter room name">
+    <button onclick="joinRoom()">Join</button>
+</div>
+
+<div class="chat-container" id="chatBox" style="display:none;">
+    <div class="header">Room Chat</div>
+
+    <div id="users" style="margin-bottom:5px;font-size:14px;"></div>
+    <div id="typingStatus" style="font-size:13px;color:gray;margin:5px;"></div>
+
+
+    <div id="messages" class="messages"></div>
+
+    <div class="input-area">
+        <input id="messageInput" placeholder="Type message" type="text">
+
+
+        <button onclick="sendMessage()">Send<br></button>
+        <br>
+        <br>
+        <br>
+
+
+<input type="file" id="fileInput" style="display:none" onchange="sendFile()">
+
+<button onclick="document.getElementById('fileInput').click()">📎</button>
+
+        <button onclick="addEmoji('😀')">😀</button>
+        <button onclick="addEmoji('❤️')">❤️</button>
+        <button onclick="addEmoji('😂')">😂</button>
+
+    </div>
+</div>
+
+
+  <source src="https://www.soundjay.com/buttons/sounds/button-3.mp3">
+
+
+<script src="chat.js"></script>
+
+</body>
+</html>

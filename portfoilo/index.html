@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Arjun Singh | Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+<!-- CSS -->
+<link rel="stylesheet" href="style.css">
+
+<!-- AOS -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<!-- GSAP -->
+<script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+
+<!-- Particles -->
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+</head>
+
+<body>
+  <audio id="hoverSound" preload="auto">
+  <source src="sounds/hover.mp3" type="audio/mpeg">
+</audio>
+
+
+<!-- Particle Background -->
+<div id="particles-js"></div>
+
+<!-- Hover Sound -->
+<audio id="hoverSound" src="sounds/hover.mp3"></audio>
+
+<!-- Navbar -->
+<header>
+  <nav class="navbar">
+    <h2 class="logo">Arjun Singh</h2>
+    <div class="menu-toggle" id="menuToggle">☰</div>
+    <ul class="nav-links">
+      <li><a href="#home" class="hover-sound">Home</a></li>
+      <li><a href="#about" class="hover-sound">About</a></li>
+      <li><a href="#projects" class="hover-sound">Projects</a></li>
+      <li><a href="#contact" class="hover-sound">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- Home -->
+<section id="home" class="section home">
+  <img src="IMG_my i.JPG" class="profile-img" data-aos="zoom-in">
+  <h1 data-aos="fade-up">Hi, I'm <span>Arjun Singh</span></h1>
+  <p data-aos="fade-up">BTech Student | Web Developer | Programmer</p>
+  <a href="#" class="btn hover-sound" data-aos="zoom-in">Download Resume</a>
+
+  <!-- 🔗 Social Media -->
+<div class="social-links">
+
+  <a href="https://www.linkedin.com/in/YOUR_LINKEDIN_ID"
+     target="_blank"
+     class="social-box hover-sound">
+    <i class="fab fa-linkedin"></i>
+    <span>@YOUR_LINKEDIN_ID</span>
+  </a>
+
+  <a href="specialarjunvns"
+     target="_blank"
+     class="social-box hover-sound">
+    <i class="fab fa-instagram"></i>
+    <span>specialarjunvns</span>
+  </a>
+
+</div>
+<!-- 📧 Email -->
+<div class="email-box hover-sound">
+  <i class="fas fa-envelope"></i>
+  <span>yourname@gmail.com</span>
+</div>
+
+
+
+</section>
+
+<!-- About -->
+<section id="about" class="section" data-aos="fade-right">
+  <h2>About Me</h2>
+  <p>
+    Passionate BTech student building responsive, animated,
+    and interactive web applications using modern technologies.
+  </p>
+
+  <div class="about-info">
+    <div class="card hover-sound">
+      <h3>Education</h3>
+      <p>B.Tech CSE</p>
+    </div>
+    <div class="card hover-sound">
+      <h3>Skills</h3>
+      <p>HTML, CSS, JS, Python</p>
+    </div>
+    <div class="card hover-sound">
+      <h3>Hobbies</h3>
+      <p>Coding & Design</p>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects" class="section">
+  <h2 data-aos="fade-up">Projects</h2>
+
+  <div class="projects-container">
+    <!-- Project: Real Time Chat App -->
+<div class="project-card hover-sound">
+  <h3>Real Time Chat App</h3>
+  <p>
+    A real-time room-based chat application with username login,
+    typing indicator, emoji support, and file sharing using Socket.IO.
+  </p>
+  <a href="http://localhost:3000" target="_blank" class="btn hover-sound">
+    View Project
+  </a>
+</div>
+
+<!-- Project: Smart Weather App -->
+<div class="project-card hover-sound">
+  <h3>Smart Weather App</h3>
+  <p>
+    A cartoon-style weather application with live API data,
+    animated background, temperature alerts, GPS location,
+    and charts.
+  </p>
+  <a href="https://candid-brigadeiros-6aa8bd.netlify.app/"
+   target="_blank"
+   class="btn hover-sound">
+  View Project
+</a>
+
+</div>
+
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="section" data-aos="fade-left">
+  <h2>Contact Me</h2>
+
+  <div class="contact-big">
+
+  <div class="contact-item hover-sound">
+    <i class="fas fa-phone"></i>
+    <span>+91 XXXXX XXXXX</span>
+  </div>
+
+  <div class="contact-item hover-sound">
+    <i class="fas fa-envelope"></i>
+    <span>yourname@gmail.com</span>
+  </div>
+
+  <div class="contact-item hover-sound">
+    <i class="fab fa-linkedin"></i>
+    <span>linkedin.com/in/yourprofile</span>
+  </div>
+
+</div>
+
+</section>
+
+<footer>
+  © 2026 Arjun Singh | Portfolio
+</footer>
+
+<!-- Scripts -->
+<script src="script.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>AOS.init({ once:true, duration:1000 });</script>
+
+</body>
+</html>
